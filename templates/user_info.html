@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息 - 第三方应用</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; border: 1px solid #ccc; padding: 20px; border-radius: 5px; }
+        .avatar { max-width: 100px; border-radius: 50%; }
+        pre { background-color: #f4f4f4; padding: 10px; border-radius: 3px; white-space: pre-wrap; word-wrap: break-word; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>欢迎, {{ user_info.nickname }}!</h1>
+        <p>您已成功通过授权平台登录。</p>
+        
+        <h2>您的信息:</h2>
+        {% if user_info.avatar %}
+            <img src="{{ user_info.avatar }}" alt="用户头像" class="avatar">
+        {% endif %}
+        <ul>
+            <li><strong>用户ID:</strong> {{ user_info.id }}</li>
+            <li><strong>昵称:</strong> {{ user_info.nickname }}</li>
+            <li><strong>邮箱:</strong> {{ user_info.email }}</li>
+        </ul>
+
+        <h2>收到的完整用户信息:</h2>
+        <pre>{{ json_user_info }}</pre>
+
+        <h2>Access Token:</h2>
+        <pre>{{ access_token }}</pre>
+
+        <p><a href="{{ url_for('logout') }}">退出登录</a></p>
+    </div>
+</body>
+</html>
